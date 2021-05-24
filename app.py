@@ -1,6 +1,6 @@
 from urllib.parse import urlencode
 
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, url_for
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from utils import generate_report
@@ -25,7 +25,9 @@ def report(acct: str):
         report = generate_report(acct)
 
         params = {
-            'text': report,
+            'title': '내가 가장 많이 사용한 단어',
+            'text': f'\n{report}\n',
+            'url': url_for('index', _external=True)
         }
 
         share_url = f'https://{domain}/share?' + urlencode(params)

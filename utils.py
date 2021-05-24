@@ -83,13 +83,9 @@ def generate_words(acct: str) -> Counter:
 
 def generate_report(acct: str) -> str:
     words = generate_words(acct)
-    report = (
-        f'Most common used words from {acct}:\n' +
-        '\n'.join(
-            f'{word}: {count}'
+    report = '\n'.join(
+            f'{word} - {count}'
             for word, count
-            in words.most_common(10)
-        )
-    )
+            in words.most_common(10))
 
     return report
