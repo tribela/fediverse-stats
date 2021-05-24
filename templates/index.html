@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" media="all" charset="utf-8">
+    <title>가장 많이 쓴 단어?</title>
+  </head>
+  <body>
+
+    <main>
+      <form>
+        <label>나의 핸들
+          <input name="acct" placeholder="jarm@qdon.space"/>
+        </label>
+        <button id="ok" type="submit">리포트 생성하기!</button>
+      </form>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
