@@ -17,6 +17,7 @@ tagger = konlpy.tag.Okt()
 
 def extract_words(text: str) -> List[str]:
     text = text.replace('\u200b', ' ')
+    text = text.replace('\n', ' ')
     pattern = re.compile(r'\B:[a-zA-Z0-9_]+:\B')
     emojis = pattern.findall(text)
     text = pattern.sub('', text)
