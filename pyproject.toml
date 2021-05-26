@@ -7,9 +7,10 @@ authors = ["Jeong Arm"]
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = "^2.25.1"
-beautifulsoup4 = "^4.9.3"
+beautifulsoup4 = "*"
 Flask = "^2.0.1"
 gunicorn = "^20.1.0"
+konlpy = "^0.5.2"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.2"

@@ -1,14 +1,26 @@
 import itertools
+import re
 
 from collections import Counter
-from typing import Generator
+from typing import Generator, List
 
+import konlpy
 import requests
 
 from bs4 import BeautifulSoup
 
 ap_sess = requests.session()
 ap_sess.headers['Accept'] = 'application/activity+json'
+
+tagger = konlpy.tag.Okt()
+
+
+def extract_words(text: str) -> List[str]:
+    text = text.replace('\u200b', ' ')
+    pattern = re.compile(r'\B:[a-zA-Z0-9_]+:\B')
+    emojis = pattern.findall(text)
+    text = pattern.sub('', text)
+    return tagger.morphs(text, norm=True) + emojis
 
 
 def extract_text(html: str) -> str:
@@ -73,7 +85,7 @@ def generate_words(acct: str) -> Counter:
     posts = get_posts(acct)
 
     words = itertools.chain.from_iterable(
-        post.split()
+        extract_words(post)
         for index, post
         in itertools.takewhile(lambda x: x[0] < 100, enumerate(posts))
     )
