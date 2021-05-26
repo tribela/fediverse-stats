@@ -15,13 +15,24 @@ ap_sess.headers['Accept'] = 'application/activity+json'
 tagger = konlpy.tag.Okt()
 
 
+def test(acct: str) -> List[str]:
+    return list(
+        post
+        for index, post
+        in itertools.takewhile(
+            lambda x: x[0] < 100,
+            enumerate(get_posts(acct))
+        )
+    )
+
+
 def extract_words(text: str) -> List[str]:
     text = text.replace('\u200b', ' ')
     text = text.replace('\n', ' ')
     pattern = re.compile(r'\B:[a-zA-Z0-9_]+:\B')
     emojis = pattern.findall(text)
     text = pattern.sub('', text)
-    return tagger.morphs(text, norm=True) + emojis
+    return tagger.nouns(text) + emojis
 
 
 def extract_text(html: str) -> str:
