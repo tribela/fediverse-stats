@@ -26,7 +26,7 @@ def report(acct: str):
 
         params = {
             'title': '내가 가장 많이 사용한 단어',
-            'text': f'\n{report}\n',
+            'text': f'\n{report}\n#내가_가장_많이_사용한_단어',
             'url': url_for('index', _external=True)
         }
 
